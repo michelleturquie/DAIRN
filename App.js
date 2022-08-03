@@ -2,30 +2,19 @@ import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 
+import Login from './components/login.js';
+import Menu from './components/menu.js';
+import Buscador from './components/buscador.js';
+
 export default function App() {
-  if 
-
-  return (
-    <View style={styles.container}>
-      <Text>Bienvenido al restaurante.</Text>
-      <Text>Ingrese su email: </Text>
-      <TextInput
-        onChangeText={setEmail}
-      />
-      <Text>Ingrese su contraseña: </Text>
-      <TextInput
-        onChangeText={setPass}
-      />
-      <StatusBar style="auto" />
-    </View>
-  );
+  //Checkea si está logueado
+  if (true) {
+    return (
+      <Buscador/>
+    );
+  } else {
+    return (
+      <Login/>
+    );
+  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

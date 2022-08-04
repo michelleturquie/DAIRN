@@ -6,13 +6,13 @@ import Plato from './plato.js';
 
 const MENUACTUAL = [
   {
-    name: 'FIDEOS'
+    title: 'FIDEOS'
   },
   {
-    name: 'CARNE'
+    title: 'CARNE'
   },
   {
-    name: 'MILANESA'
+    title: 'MILANESA'
   },
 ];
 
@@ -26,7 +26,7 @@ export default function menu() {
       <FlatList
         data={MENUACTUAL}
         renderItem={renderItem}
-        keyExtractor={item => item.name}
+        keyExtractor={item => item.title}
       />
     </SafeAreaView>
   );

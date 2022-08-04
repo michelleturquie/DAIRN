@@ -1,9 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 
 export default function plato({data}) {
   return(
-    <Text>{data.name}</Text>
+    <>
+    <Text>NOMBRE: {data.title}</Text>
+    <Image source={{uri:'https://engineering.fb.com/wp-content/uploads/2016/04/yearinreview.jpg'}} /> {/*NOT WORKING*/}
+    </>
   );
 }
 

@@ -1,22 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, FlatList } from 'react-native';
+import { SafeAreaView, FlatList, Button } from 'react-native';
 
 import Plato from './plato.js';
-
-const MENUACTUAL = [
-  {
-    title: 'FIDEOS'
-  },
-  {
-    title: 'CARNE'
-  },
-  {
-    title: 'MILANESA'
-  },
-];
+import menuContext from "../contexts/menuContext";
 
 export default function menu() {
+  const { menu, setMenu } = useContext(menuContext);
+
   const renderItem = ({ item }) => (
     <Plato data={item}/>
   );
@@ -24,10 +15,18 @@ export default function menu() {
   return (
     <SafeAreaView>
       <FlatList
-        data={MENUACTUAL}
+        data={menu}
         renderItem={renderItem}
         keyExtractor={item => item.title}
       />
+      <Button
+      title="ANIADIR POCHOCLO"
+      onPress={() => {
+        let aux = menu;
+        aux.push({title: 'pochoclos'});
+        setMenu(aux);
+      }}
+    />
     </SafeAreaView>
   );
 }

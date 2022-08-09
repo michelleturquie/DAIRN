@@ -35,12 +35,11 @@ async function onChangeText(value) {
 export default function buscador() {
   const [found, setFound] = useState([]);
   const renderItem = ({ item }) => (
-    <Plato data={item}/>
+    <Plato data={item} isMenu={false}/>
   );
 
   return (
     <SafeAreaView>
-      {console.log(found)}
       <TextInput
         onChangeText={async (value) => {
           setFound(await onChangeText(value))

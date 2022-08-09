@@ -12,21 +12,16 @@ export default function App() {
   const [auth, setAuth] = useState(false);
   const [menu, setMenu] = useState([
     {
-      title: 'FIDEOS'
-    },
-    {
-      title: 'CARNE'
-    },
-    {
-      title: 'MILANESA'
-    },
+      title: 'Pizza bites with pumpkin'
+    }
   ]);
 
   return (
     <tokenContext.Provider value={{ auth, setAuth }}>
-      {auth ?
+      {true ?
         <menuContext.Provider value={{ menu, setMenu }}>
           <Menu/>
+          <Buscador/>
         </menuContext.Provider>
       :
         <Login/>

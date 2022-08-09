@@ -9,7 +9,7 @@ export default function menu() {
   const { menu, setMenu } = useContext(menuContext);
 
   const renderItem = ({ item }) => (
-    <Plato data={item}/>
+    <Plato data={item} isMenu={true}/>
   );
 
   return (
@@ -19,14 +19,6 @@ export default function menu() {
         renderItem={renderItem}
         keyExtractor={item => item.title}
       />
-      <Button
-      title="ANIADIR POCHOCLO"
-      onPress={() => {
-        let aux = menu;
-        aux.push({title: 'pochoclos'});
-        setMenu(aux);
-      }}
-    />
     </SafeAreaView>
   );
 }

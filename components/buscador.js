@@ -1,19 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import 'dotenv/config';
 import { SafeAreaView, FlatList, TextInput } from 'react-native';
 import axios from "axios";
 
 import Plato from './plato.js';
+import menu from './menu.js';
+import menuContext from "../contexts/menuContext";
 
-const API = [
-  'HELADO',
-  'PIZZA',
-  'CARNE',
-  'POLLO',
-  'TORTA',
-];
-
-let found = [];
 
 async function onChangeText(value) {
   if(value.length > 3) {
@@ -34,10 +27,12 @@ async function onChangeText(value) {
 
 export default function buscador() {
   const [found, setFound] = useState([]);
+  const { menu, setMenu } = useContext(menuContext);
+
   const renderItem = ({ item }) => (
     <Plato data={item} isMenu={false}/>
   );
-
+    console.log(menu)
   return (
     <SafeAreaView>
       <TextInput
@@ -51,5 +46,5 @@ export default function buscador() {
         keyExtractor={item => item.id}
       />
     </SafeAreaView>
-  );
+);
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
 
@@ -13,16 +13,19 @@ export default function App() {
   const [menu, setMenu] = useState([
     {
       title: 'Pizza bites with pumpkin'
+    },
+    {
+      title: 'asdasd'
     }
   ]);
 
   return (
     <tokenContext.Provider value={{ auth, setAuth }}>
       {true ?
-        <menuContext.Provider value={{ menu, setMenu }}>
-          <Menu/>
-          <Buscador/>
-        </menuContext.Provider>
+        <View>
+          <Menu menu={menu} setMenu={setMenu}/>
+          <Buscador menu={menu} setMenu={setMenu}/>
+        </View>
       :
         <Login/>
       }

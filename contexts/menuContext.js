@@ -1,8 +1,8 @@
 import { createContext } from "react";
 
 const menuContext = createContext({
-  platos: [],
-  setPlatos: (platos) => {}
+  menu: [],
+  setMenu: (platos) => {}
 });
 
 export default menuContext;

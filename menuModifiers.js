@@ -1,15 +1,12 @@
 import { useContext } from 'react';
 import menuContext from "./contexts/menuContext";
 
-const { menu, setMenu } = useContext(menuContext);
-
 function addPlato(plato) {
-    let aux = menu;
-    aux.push(plato);
-    setMenu(aux);
+    const { menu, setMenu } = useContext(menuContext);
+    console.log(menu);
 }
 
-function deletePlato() {
+function deletePlato(plato) {
 
 }
 

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import 'dotenv/config';
-import { SafeAreaView, FlatList, TextInput } from 'react-native';
+import { SafeAreaView, FlatList, TextInput, Text } from 'react-native';
 import axios from "axios";
 
 import Plato from './plato.js';
@@ -25,16 +25,16 @@ async function onChangeText(value) {
   }
 }
 
-export default function buscador() {
+export default function buscador({props}) {
   const [found, setFound] = useState([]);
-  const { menu, setMenu } = useContext(menuContext);
 
   const renderItem = ({ item }) => (
-    <Plato data={item} isMenu={false}/>
+    <Plato data={item} isMenu={false} setMenu={props.setMenu} menu={props.menu}/>
   );
-    console.log(menu)
+
   return (
     <SafeAreaView>
+      <Text>Buscador:</Text>
       <TextInput
         onChangeText={async (value) => {
           setFound(await onChangeText(value))

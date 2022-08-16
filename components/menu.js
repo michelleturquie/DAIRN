@@ -1,22 +1,92 @@
-import React, { useContext } from 'react';
-import { SafeAreaView, FlatList } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { SafeAreaView, FlatList, Text, Modal, StyleSheet, View, Pressable, Image } from 'react-native';
 
 import Plato from './plato.js';
-import menuContext from "../contexts/menuContext";
 
-export default function menu(menu, setMenu) {
+export default function menu({props}) {
+  const [modalData, setModal] = useState(false);
 
   const renderItem = ({ item }) => (
-    <Plato data={item} isMenu={true} setMenu={setMenu}/>
+    <Plato data={item} isMenu={true} setMenu={props.setMenu} menu={props.menu} modal={modalData} setModal={setModal}/>
   );
 
   return (
     <SafeAreaView>
+      <Text>Menu:</Text>
       <FlatList
-        data={menu}
+        data={props.menu}
         renderItem={renderItem}
         keyExtractor={item => item.title}
       />
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalData}
+        onRequestClose={() => {
+          setModal(!modalData);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>DETALLES DEL PLATO: </Text>
+            <Text style={styles.modalText}>Nombre: {modalData.title} </Text>
+            <Image
+              style={{width: '100%', height: '50%'}}
+              source={{uri:modalData.image}}
+            />
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModal(!modalData)}
+            >
+              <Text style={styles.textStyle}>CERRAR</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
+  }
+});

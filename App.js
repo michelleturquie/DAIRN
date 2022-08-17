@@ -10,7 +10,7 @@ import tokenContext from "./contexts/tokenContext";
 export default function App() {
   const [auth, setAuth] = useState(false);
   const [menu, setMenu] = useState([]);
-  console.log(menu)
+
   return (
     <tokenContext.Provider value={{ auth, setAuth }}>
       {true ?

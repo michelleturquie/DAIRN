@@ -4,15 +4,12 @@ import { SafeAreaView, FlatList, TextInput, Text } from 'react-native';
 import axios from "axios";
 
 import Plato from './plato.js';
-import menu from './menu.js';
-import menuContext from "../contexts/menuContext";
-
 
 async function onChangeText(value) {
-  if(value.length > 3) {
+  if(value.length > 2) {
     return await axios.get('https://api.spoonacular.com/recipes/complexSearch', { 
       params: {
-        apiKey: 'f257955125f84e949758c448fc42f5aa',
+        apiKey: '043e74bda216441d85308025e83b1262',
         query: value
       }
     })  

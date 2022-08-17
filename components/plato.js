@@ -1,7 +1,20 @@
 import React, {useContext} from 'react';
 import { StyleSheet, Text, Pressable } from 'react-native';
+import axios from "axios";
 
-import menuContext from "../contexts/menuContext";
+async function onPlatoAdded(id) {
+  return await axios.get(`https://api.spoonacular.com/recipes/${id}/information`, { 
+    params: {
+      apiKey: '043e74bda216441d85308025e83b1262'
+    }
+  })  
+  .then(function (response) {
+    return response.data;
+  })
+  .catch(() => {
+    return null;
+  });
+}
 
 export default function plato({data, isMenu, setMenu, menu, setModal}) {
   return(
@@ -24,12 +37,15 @@ export default function plato({data, isMenu, setMenu, menu, setModal}) {
         </Pressable>
         </>
         :
-        <Pressable style={styles.button} onPress={() => {
+        <Pressable style={styles.button} onPress={async () => {
           let aux = menu;
-          aux.push(data);
+          let newPlato = await onPlatoAdded(data.id);
+          aux.push(newPlato);
           setMenu([...aux]);
           }}
-          disabled={menu.some(plato => plato.title === data.title)}>
+          disabled={menu.some(plato => {
+            return plato.title === data.title ||
+          } )}>
           <Text>AÑADIR</Text>
         </Pressable>
       }

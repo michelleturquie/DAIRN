@@ -5,7 +5,7 @@ import axios from "axios";
 async function onPlatoAdded(id) {
   return await axios.get(`https://api.spoonacular.com/recipes/${id}/information`, { 
     params: {
-      apiKey: '043e74bda216441d85308025e83b1262'
+      apiKey: 'f6f6f4ca17c74fdb8051f432f9e7cc00'
     }
   })  
   .then(function (response) {
@@ -40,11 +40,28 @@ export default function plato({data, isMenu, setMenu, menu, setModal}) {
         <Pressable style={styles.button} onPress={async () => {
           let aux = menu;
           let newPlato = await onPlatoAdded(data.id);
-          aux.push(newPlato);
-          setMenu([...aux]);
-          }}
+          let vegan = 0;
+          let notVegan = 0;
+          aux.forEach(element => {
+            element.vegan ? vegan++ : notVegan++;
+            console.log(element.vegan)
+          });
+
+
+          /*if (newPlato.vegan && vegan == 2) {
+            console.log('Alcanzaste el limite de 2 platos veganos')
+          } else if (!newPlato.vegan && notVegan == 2) {
+            console.log('Alcanzaste el limite de 2 platos NO veganos')
+          } else {
+            aux.push(newPlato);
+            setMenu([...aux]);
+          }
+          console.log('veganos: ' + vegan)
+          console.log('no veganos: ' + notVegan)
+          }*/
+        }}
           disabled={menu.some(plato => {
-            return plato.title === data.title ||
+            return plato.title === data.title || menu.length == 4
           } )}>
           <Text>AÑADIR</Text>
         </Pressable>

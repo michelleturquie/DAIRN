@@ -9,7 +9,7 @@ async function onChangeText(value) {
   if(value.length > 2) {
     return await axios.get('https://api.spoonacular.com/recipes/complexSearch', { 
       params: {
-        apiKey: '043e74bda216441d85308025e83b1262',
+        apiKey: 'f6f6f4ca17c74fdb8051f432f9e7cc00',
         query: value
       }
     })  

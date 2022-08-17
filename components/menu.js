@@ -40,6 +40,7 @@ export default function menu({props}) {
             <Text style={styles.modalText}>DETALLES DEL PLATO: </Text>
             <Text style={styles.modalText}>Nombre: {modalData.title} </Text>
             <Text style={styles.modalText}>Precio: {modalData.pricePerServing} </Text>
+            <Text style={styles.modalText}>ES VEGANO?: {modalData.vegan ? 'si' : 'no'} </Text>
             <Image
               style={{width: '100%', height: '50%'}}
               source={{uri:modalData.image}}

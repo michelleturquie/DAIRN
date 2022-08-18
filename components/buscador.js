@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import 'dotenv/config';
 import { SafeAreaView, FlatList, TextInput, Text } from 'react-native';
 import axios from "axios";
+import { NativeBaseProvider, Box } from "native-base";
 
 import Plato from './plato.js';
 
@@ -9,7 +10,7 @@ async function onChangeText(value) {
   if(value.length > 2) {
     return await axios.get('https://api.spoonacular.com/recipes/complexSearch', { 
       params: {
-        apiKey: 'f6f6f4ca17c74fdb8051f432f9e7cc00',
+        apiKey: 'f257955125f84e949758c448fc42f5aa',
         query: value
       }
     })  

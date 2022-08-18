@@ -1,11 +1,13 @@
 import React, {useContext} from 'react';
 import { StyleSheet, Text, Pressable } from 'react-native';
 import axios from "axios";
+import { NativeBaseProvider, Badge } from "native-base";
+
 
 async function onPlatoAdded(id) {
   return await axios.get(`https://api.spoonacular.com/recipes/${id}/information`, { 
     params: {
-      apiKey: 'f6f6f4ca17c74fdb8051f432f9e7cc00'
+      apiKey: 'f257955125f84e949758c448fc42f5aa'
     }
   })  
   .then(function (response) {
@@ -35,6 +37,13 @@ export default function plato({data, isMenu, setMenu, menu, setModal}) {
         >
         <Text>DETALLES</Text>
         </Pressable>
+        {data.vegan ?
+          <NativeBaseProvider>
+            <Badge colorScheme="success">VEGANO</Badge>
+          </NativeBaseProvider>
+          : null
+        }
+
         </>
         :
         <Pressable style={styles.button} onPress={async () => {
@@ -44,22 +53,18 @@ export default function plato({data, isMenu, setMenu, menu, setModal}) {
           let notVegan = 0;
           aux.forEach(element => {
             element.vegan ? vegan++ : notVegan++;
-            console.log(element.vegan)
           });
-
-
-          /*if (newPlato.vegan && vegan == 2) {
-            console.log('Alcanzaste el limite de 2 platos veganos')
+          if (newPlato.vegan && vegan == 2) {
+            console.log('VEGANO FULL')
+            return null;
           } else if (!newPlato.vegan && notVegan == 2) {
-            console.log('Alcanzaste el limite de 2 platos NO veganos')
-          } else {
-            aux.push(newPlato);
-            setMenu([...aux]);
+            console.log('no VEGANO FULL')
+            return null;
           }
-          console.log('veganos: ' + vegan)
-          console.log('no veganos: ' + notVegan)
-          }*/
-        }}
+          aux.push(newPlato);
+          setMenu([...aux]);
+          }
+        }
           disabled={menu.some(plato => {
             return plato.title === data.title || menu.length == 4
           } )}>

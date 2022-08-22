@@ -1,16 +1,15 @@
-import React, { useState, useContext } from 'react';
-import 'dotenv/config';
+import React, { useState } from 'react';
 import { SafeAreaView, FlatList, TextInput, Text } from 'react-native';
 import axios from "axios";
-import { NativeBaseProvider, Box } from "native-base";
+import 'dotenv/config'
 
 import Plato from './plato.js';
-
 async function onChangeText(value) {
+  console.log(process.env.API)
   if(value.length > 2) {
     return await axios.get('https://api.spoonacular.com/recipes/complexSearch', { 
       params: {
-        apiKey: 'f257955125f84e949758c448fc42f5aa',
+        apiKey: process.env.API,
         query: value
       }
     })  
@@ -32,11 +31,12 @@ export default function buscador({props}) {
 
   return (
     <SafeAreaView>
-      <Text>Buscador:</Text>
+      <Text style={{fontSize: 24, color: "#000" }}>Buscador:</Text>
       <TextInput
         onChangeText={async (value) => {
           setFound(await onChangeText(value))
         }}
+        placeholder={"Ingrese su plato"}
       />
       <FlatList
         data={found}

@@ -1,13 +1,13 @@
 import React, {useContext} from 'react';
 import { StyleSheet, Text, Pressable } from 'react-native';
 import axios from "axios";
-import { NativeBaseProvider, Badge } from "native-base";
-
+import { Badge, Button, Center, HStack } from 'native-base';
+import 'dotenv/config';
 
 async function onPlatoAdded(id) {
   return await axios.get(`https://api.spoonacular.com/recipes/${id}/information`, { 
     params: {
-      apiKey: 'f257955125f84e949758c448fc42f5aa'
+      apiKey: process.env.API
     }
   })  
   .then(function (response) {
@@ -19,34 +19,44 @@ async function onPlatoAdded(id) {
 }
 
 export default function plato({data, isMenu, setMenu, menu, setModal}) {
+  let platoDes = false;
+  let colorScheme = "primary";
+  platoDes = menu.some(plato => {
+    return plato.title === data.title || menu.length == 4
+  })
+  if(platoDes) {
+    colorScheme = "secondary"
+  }
   return(
-    <>
-      <Text>NOMBRE: {data.title}</Text>
+    <> 
+      <Center>
+      <HStack space={2}>
+        <Text>{data.title}</Text>
+        {data.vegan ?
+            <Badge colorScheme="success">VEGANO</Badge>
+            : null
+        }
+      </HStack>
       {
         isMenu ?
         <>
-        <Pressable style={styles.button} onPress={() => {
-          menu = menu.filter(item => item.title != data.title)
-          setMenu(menu)
-        }}>
-          <Text>ELIMINAR</Text>
-        </Pressable>
-        <Pressable style={styles.button} onPress={() => {
-          setModal(data);
-        }}
-        >
-        <Text>DETALLES</Text>
-        </Pressable>
-        {data.vegan ?
-          <NativeBaseProvider>
-            <Badge colorScheme="success">VEGANO</Badge>
-          </NativeBaseProvider>
-          : null
-        }
-
+        <HStack space={2} justifyContent="center">
+          <Button onPress={() => {
+            menu = menu.filter(item => item.title != data.title)
+            setMenu(menu)
+          }}>
+            <Text style={{color:'white'}}>ELIMINAR</Text>
+          </Button>
+          <Button onPress={() => {
+            setModal(data);
+          }}
+          >
+          <Text style={{color:'white'}}>DETALLES</Text>
+          </Button>
+        </HStack>
         </>
         :
-        <Pressable style={styles.button} onPress={async () => {
+        <Button onPress={async () => {
           let aux = menu;
           let newPlato = await onPlatoAdded(data.id);
           let vegan = 0;
@@ -54,30 +64,14 @@ export default function plato({data, isMenu, setMenu, menu, setModal}) {
           aux.forEach(element => {
             element.vegan ? vegan++ : notVegan++;
           });
-          if (newPlato.vegan && vegan == 2) {
-            console.log('VEGANO FULL')
-            return null;
-          } else if (!newPlato.vegan && notVegan == 2) {
-            console.log('no VEGANO FULL')
+          if (newPlato.vegan && vegan == 2 || !newPlato.vegan && notVegan == 2) {
             return null;
           }
           aux.push(newPlato);
           setMenu([...aux]);
-          }
-        }
-          disabled={menu.some(plato => {
-            return plato.title === data.title || menu.length == 4
-          } )}>
-          <Text>AÑADIR</Text>
-        </Pressable>
+          }} disabled={platoDes} colorScheme={colorScheme}>AÑADIR</Button>
       }
-
+      </Center>
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  button: {
-    width: 100
-  },
-});

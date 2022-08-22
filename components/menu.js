@@ -1,3 +1,4 @@
+import { Checkbox, VStack } from 'native-base';
 import React, { useState, useEffect, useContext } from 'react';
 import { SafeAreaView, FlatList, Text, Modal, StyleSheet, View, Pressable, Image } from 'react-native';
 
@@ -16,17 +17,23 @@ export default function menu({props}) {
   const renderItem = ({ item }) => (
     <Plato data={item} isMenu={true} setMenu={props.setMenu} menu={props.menu} modal={modalData} setModal={setModal}/>
   );
-
+  let vegan = 0;
+  let notVegan = 0;
+  props.menu.forEach(element => {
+    element.vegan ? vegan++ : notVegan++;
+  });
   return (
     <SafeAreaView>
-      <Text>Menu:</Text>
+      <Text style={{fontSize: 24, color: "#000" }} >Menu:</Text>
+      <Text>Acumulativo precio: {acumulativoPrecio}</Text>
+      <Text>Salud promedio: {props.menu.length ? acumulativoSalud / props.menu.length : '0'}</Text>
+      <Text>Platos veganos: {vegan} {vegan == 2 ? '[MAX]' : ''}</Text>
+      <Text>Platos no veganos: {notVegan} {notVegan == 2 ? '[MAX]' : ''}</Text>
       <FlatList
         data={props.menu}
         renderItem={renderItem}
         keyExtractor={item => item.title}
       />
-      <Text>Acumulativo precio: {acumulativoPrecio}</Text>
-      <Text>Salud promedio: {acumulativoSalud / props.menu.length}</Text>
       <Modal
         animationType="slide"
         transparent={true}
@@ -42,7 +49,7 @@ export default function menu({props}) {
             <Text style={styles.modalText}>Precio: {modalData.pricePerServing} </Text>
             <Text style={styles.modalText}>ES VEGANO?: {modalData.vegan ? 'si' : 'no'} </Text>
             <Image
-              style={{width: '100%', height: '50%'}}
+              style={{width: '100%', height: '40%'}}
               source={{uri:modalData.image}}
             />
             <Pressable

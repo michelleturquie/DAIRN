@@ -2,12 +2,13 @@ import React, {useContext} from 'react';
 import { StyleSheet, Text, Pressable } from 'react-native';
 import axios from "axios";
 import { Badge, Button, Center, HStack } from 'native-base';
-import 'dotenv/config';
+
+const API_KEY = "f3e7445d74fe49f7a2e5e541ad6229d7";
 
 async function onPlatoAdded(id) {
   return await axios.get(`https://api.spoonacular.com/recipes/${id}/information`, { 
     params: {
-      apiKey: process.env.API
+      apiKey: API_KEY
     }
   })  
   .then(function (response) {

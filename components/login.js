@@ -34,6 +34,7 @@ export default function login() {
     <Text>Ingrese su contraseña: </Text>
     <TextInput
       onChangeText={setPass}
+      secureTextEntry={true}
     />
     <StatusBar style="auto" />
     <Button

@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { SafeAreaView, FlatList, TextInput, Text } from 'react-native';
 import axios from "axios";
-import 'dotenv/config'
+
+const API_KEY = "f3e7445d74fe49f7a2e5e541ad6229d7";
 
 import Plato from './plato.js';
 async function onChangeText(value) {
-  console.log(process.env.API)
   if(value.length > 2) {
     return await axios.get('https://api.spoonacular.com/recipes/complexSearch', { 
       params: {
-        apiKey: process.env.API,
+        apiKey: API_KEY,
         query: value
       }
     })  

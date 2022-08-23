@@ -19,7 +19,7 @@ export default function App() {
       <ImageBackground  style={{width: '100%', height: '100%'}} source={{uri: "https://i.pinimg.com/originals/ca/84/0b/ca840b57a9463fce791ff5cc0b4a125d.jpg"}} resizeMode="cover">
         <Center>
           <tokenContext.Provider value={{ auth, setAuth }}>
-          {true ?
+          {auth ?
             <View style={{flexDirection:"row"}}>
               <Buscador props={{menu, setMenu}}/>
               <Menu props={{menu, setMenu}}/>

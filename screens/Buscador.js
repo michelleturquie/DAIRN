@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SafeAreaView, FlatList, TextInput, Text } from 'react-native';
+import { NativeBaseProvider, Box, VStack} from "native-base";
 import axios from "axios";
 
 const API_KEY = "f3e7445d74fe49f7a2e5e541ad6229d7";
@@ -31,7 +32,14 @@ export default function buscador({props}) {
 
   return (
     <SafeAreaView>
-      <Text style={{fontSize: 24, color: "#000" }}>Buscador:</Text>
+      <VStack my="4" space={5} w="100%" maxW="300px" divider={<Box px="2">
+          <Divider />
+        </Box>}>
+      <VStack w="100%" space={5} alignSelf="center">
+        <Heading fontSize="lg">Buscador</Heading>
+        <Input placeholder="Search" variant="filled" width="100%" borderRadius="10" py="1" px="2" InputLeftElement={<Icon ml="2" size="4" color="gray.400" as={<Ionicons name="ios-search" />} />} />
+      </VStack>
+      </VStack>
       <TextInput
         onChangeText={async (value) => {
           setFound(await onChangeText(value))

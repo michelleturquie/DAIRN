@@ -2,7 +2,7 @@ import { Checkbox, VStack } from 'native-base';
 import React, { useState, useEffect, useContext } from 'react';
 import { SafeAreaView, FlatList, Text, Modal, StyleSheet, View, Pressable, Image } from 'react-native';
 
-import Plato from './plato.js';
+import Plato from './Plato.js';
 
 export default function menu({props}) {
   const [modalData, setModal] = useState(false);

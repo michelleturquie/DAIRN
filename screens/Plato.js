@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {Text} from 'react-native';
+import {Text, StyleSheet} from 'react-native';
 import axios from "axios";
 import { Badge, Button, Center, HStack } from 'native-base';
 
@@ -21,20 +21,21 @@ async function onPlatoAdded(id) {
 
 export default function plato({data, isMenu, setMenu, menu, setModal}) {
   let platoDes = false;
-  let colorScheme = "primary";
+  let colorScheme = "coolGray";
+
   platoDes = menu.some(plato => {
     return plato.title === data.title || menu.length == 4
   })
   if(platoDes) {
-    colorScheme = "secondary"
+    colorScheme = "success"
   }
-  return(
-    <> 
+
+  return( 
       <Center>
       <HStack space={2}>
         <Text>{data.title}</Text>
         {data.vegan ?
-            <Badge colorScheme="success">VEGANO</Badge>
+            <Badge colorScheme="success">Vegano</Badge>
             : null
         }
       </HStack>
@@ -42,17 +43,17 @@ export default function plato({data, isMenu, setMenu, menu, setModal}) {
         isMenu ?
         <>
         <HStack space={2} justifyContent="center">
-          <Button onPress={() => {
+          <Button colorScheme="danger" onPress={() => {
             menu = menu.filter(item => item.title != data.title)
             setMenu(menu)
           }}>
-            <Text style={{color:'white'}}>ELIMINAR</Text>
+            <Text style={{color:'white'}}>Eliminar</Text>
           </Button>
-          <Button onPress={() => {
+          <Button colorScheme="info" onPress={() => {
             setModal(data);
           }}
           >
-          <Text style={{color:'white'}}>DETALLES</Text>
+          <Text style={{color:'white'}}>Detalles</Text>
           </Button>
         </HStack>
         </>
@@ -70,9 +71,9 @@ export default function plato({data, isMenu, setMenu, menu, setModal}) {
           }
           aux.push(newPlato);
           setMenu([...aux]);
-          }} disabled={platoDes} colorScheme={colorScheme}>AÑADIR</Button>
+          }} disabled={platoDes} colorScheme={colorScheme}>Añadir Plato</Button>
       }
       </Center>
-    </>
   );
 }
+

@@ -4,18 +4,18 @@ import { SafeAreaView, FlatList, Text, Modal, StyleSheet, View, Pressable, Image
 
 import Plato from './Plato.js';
 
-export default function menu({props}) {
+export default function menu({ props }) {
   const [modalData, setModal] = useState(false);
-  
+
   let acumulativoPrecio = 0;
   let acumulativoSalud = 0;
   props.menu.forEach(element => {
-    acumulativoPrecio+=element.pricePerServing;
-    acumulativoSalud+=element.healthScore;
+    acumulativoPrecio += element.pricePerServing;
+    acumulativoSalud += element.healthScore;
   });
 
   const renderItem = ({ item }) => (
-    <Plato data={item} isMenu={true} setMenu={props.setMenu} menu={props.menu} modal={modalData} setModal={setModal}/>
+    <Plato data={item} isMenu={true} setMenu={props.setMenu} menu={props.menu} modal={modalData} setModal={setModal} />
   );
   let vegan = 0;
   let notVegan = 0;
@@ -24,11 +24,11 @@ export default function menu({props}) {
   });
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={{fontSize: 24, color: "#000" }} >Menu:</Text>
+      <Text style={{ fontSize: 24, color: "#000" }} >Menu:</Text>
       <Text>Acumulativo precio: {acumulativoPrecio}</Text>
       <Text>Salud promedio: {props.menu.length ? acumulativoSalud / props.menu.length : '0'}</Text>
-      <Text>Platos veganos: {vegan} {vegan == 2 ? '[MAX]' : ''}</Text>
-      <Text>Platos no veganos: {notVegan} {notVegan == 2 ? '[MAX]' : ''}</Text>
+      <Text>Platos veganos: {vegan} {vegan == 2 ? '[Maximo de platos]' : ''}</Text>
+      <Text>Platos no veganos: {notVegan} {notVegan == 2 ? '[Maximo de platos]' : ''}</Text>
       <FlatList
         data={props.menu}
         renderItem={renderItem}
@@ -47,16 +47,16 @@ export default function menu({props}) {
             <Text style={styles.modalText}>DETALLES DEL PLATO: </Text>
             <Text style={styles.modalText}>Nombre: {modalData.title} </Text>
             <Text style={styles.modalText}>Precio: {modalData.pricePerServing} </Text>
-            <Text style={styles.modalText}>ES VEGANO?: {modalData.vegan ? 'si' : 'no'} </Text>
+            <Text style={styles.modalText}>Es Vegano?: {modalData.vegan ? 'si' : 'no'} </Text>
             <Image
-              style={{width: '100%', height: '40%'}}
-              source={{uri:modalData.image}}
+              style={{ width: '100%', height: '40%' }}
+              source={{ uri: modalData.image }}
             />
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonCerrar]}
               onPress={() => setModal(!modalData)}
             >
-              <Text style={styles.textStyle}>CERRAR</Text>
+              <Text style={styles.textStyle}>Cerrar</Text>
             </Pressable>
           </View>
         </View>
@@ -71,7 +71,6 @@ const styles = StyleSheet.create({
     marginVertical: 300,
     alignItems: 'center',
     justifyContent: 'center',
-    fontWeight: 'bold',
   },
   centeredView: {
     flex: 1,
@@ -82,7 +81,6 @@ const styles = StyleSheet.create({
   modalView: {
     margin: 20,
     backgroundColor: "white",
-    borderRadius: 20,
     padding: 35,
     alignItems: "center",
     shadowColor: "#000",
@@ -99,18 +97,15 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2
   },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
-  buttonClose: {
-    backgroundColor: "#2196F3",
+  buttonCerrar: {
+    backgroundColor: "black",
   },
   textStyle: {
     color: "white",
-    fontWeight: "bold",
     textAlign: "center"
   },
   modalText: {
+    fontWeight: "bold",
     marginBottom: 15,
     textAlign: "center"
   }

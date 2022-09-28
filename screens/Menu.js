@@ -44,7 +44,7 @@ export default function menu({ props }) {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>DETALLES DEL PLATO: </Text>
+            <Text style={styles.modalText}>Detalles del Plato: </Text>
             <Text style={styles.modalText}>Nombre: {modalData.title} </Text>
             <Text style={styles.modalText}>Precio: {modalData.pricePerServing} </Text>
             <Text style={styles.modalText}>Es Vegano?: {modalData.vegan ? 'si' : 'no'} </Text>

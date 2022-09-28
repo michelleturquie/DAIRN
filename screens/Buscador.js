@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, SafeAreaView, FlatList, TextInput, Text } from 'react-native';
+import { StyleSheet, SafeAreaView, FlatList, Text } from 'react-native';
 import { Input, Stack } from "native-base";
 import axios from "axios";
 import Plato from './Plato.js';
@@ -34,19 +34,19 @@ export default function buscador({ props }) {
   return (
     <SafeAreaView style={styles.container}>
       <Stack space={4} w="75%" maxW="300px" mx="auto">
-    <Text style={{fontSize: 24, color: "#000" }}>Buscador:</Text>
-    <Input variant="filled" onChangeText={async (value) => {
-        setFound(await onChangeText(value))
-      }}
-      placeholder={"Busque un plato"}
-    />
-    </Stack>
-    <FlatList
-      data={found}
-      renderItem={renderItem}
-      keyExtractor={item => item.id}
-    />
-  </SafeAreaView>
+        <Text style={{ fontSize: 24, color: "#000" }}>Buscador:</Text>
+        <Input variant="filled" onChangeText={async (value) => {
+          setFound(await onChangeText(value))
+        }}
+          placeholder={"Busque un plato"}
+        />
+      </Stack>
+      <FlatList
+        data={found}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+      />
+    </SafeAreaView>
   );
 }
 

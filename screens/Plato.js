@@ -5,7 +5,7 @@ import { Badge, Button, Center, HStack } from 'native-base';
 
 const API_KEY = "f3e7445d74fe49f7a2e5e541ad6229d7";
 
-async function onPlatoAdded(id) {
+async function AgregarPlato(id) {
   return await axios.get(`https://api.spoonacular.com/recipes/${id}/information`, { 
     params: {
       apiKey: API_KEY
@@ -20,13 +20,13 @@ async function onPlatoAdded(id) {
 }
 
 export default function plato({data, isMenu, setMenu, menu, setModal}) {
-  let platoDes = false;
+  let platoOff = false;
   let colorScheme = "coolGray";
 
-  platoDes = menu.some(plato => {
+  platoOff = menu.some(plato => {
     return plato.title === data.title || menu.length == 4
   })
-  if(platoDes) {
+  if(platoOff) {
     colorScheme = "success"
   }
 
@@ -60,7 +60,7 @@ export default function plato({data, isMenu, setMenu, menu, setModal}) {
         :
         <Button onPress={async () => {
           let aux = menu;
-          let newPlato = await onPlatoAdded(data.id);
+          let newPlato = await AgregarPlato(data.id);
           let vegan = 0;
           let notVegan = 0;
           aux.forEach(element => {
@@ -71,7 +71,7 @@ export default function plato({data, isMenu, setMenu, menu, setModal}) {
           }
           aux.push(newPlato);
           setMenu([...aux]);
-          }} disabled={platoDes} colorScheme={colorScheme}>Añadir Plato</Button>
+          }} disabled={platoOff} colorScheme={colorScheme}>Añadir Plato</Button>
       }
       </Center>
   );

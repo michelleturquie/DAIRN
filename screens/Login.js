@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { setStatusBarHidden, StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 import axios from "axios";
-import tokenContext from "../contexts/TokenContext";
 import { Input, Stack } from "native-base";
 
 async function handleSubmit(email, password) {
@@ -10,7 +9,8 @@ async function handleSubmit(email, password) {
     email: email,
     password: password
   })
-    .then(() => {
+    .then(() => { 
+      console.log ("test")
       return true;
     })
     .catch(() => {
@@ -18,11 +18,10 @@ async function handleSubmit(email, password) {
     });
 }
 
-export default function login() {
+export default function login({props}) {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const [inv, setInv] = useState(false);
-  const { setAuth } = useContext(tokenContext);
 
   return (
     <View style={styles.container}>
@@ -39,7 +38,8 @@ export default function login() {
             setInv(true);
           } else {
             const res = await handleSubmit(email, pass);
-            setAuth(res);
+            props.setAuth(res);
+            console.log(props.auth);
           }
         }}
       />

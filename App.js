@@ -1,8 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
-
-
+import {View} from 'react-native';
 import Login from './screens/login.js';
 import Menu from './screens/menu.js';
 import Buscador from './screens/buscador.js';
@@ -25,7 +22,7 @@ export default function App() {
               <Menu props={{menu, setMenu}}/>
             </View>
           :
-            <Login/>
+            <Login props={{auth, setAuth}}/>
           }
           </tokenContext.Provider>
         </Center>

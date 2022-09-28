@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import { StyleSheet, Text, Pressable } from 'react-native';
+import {Text} from 'react-native';
 import axios from "axios";
 import { Badge, Button, Center, HStack } from 'native-base';
 

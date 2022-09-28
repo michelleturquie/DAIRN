@@ -23,7 +23,7 @@ export default function menu({props}) {
     element.vegan ? vegan++ : notVegan++;
   });
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <Text style={{fontSize: 24, color: "#000" }} >Menu:</Text>
       <Text>Acumulativo precio: {acumulativoPrecio}</Text>
       <Text>Salud promedio: {props.menu.length ? acumulativoSalud / props.menu.length : '0'}</Text>
@@ -66,6 +66,13 @@ export default function menu({props}) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginVertical: 300,
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontWeight: 'bold',
+  },
   centeredView: {
     flex: 1,
     justifyContent: "center",

@@ -3,7 +3,7 @@ import {Text, StyleSheet} from 'react-native';
 import axios from "axios";
 import { Badge, Button, Center, HStack } from 'native-base';
 
-const API_KEY = "f3e7445d74fe49f7a2e5e541ad6229d7";
+const API_KEY = "221d9747c4fb456ea27b3066c173ae43";
 
 async function AgregarPlato(id) {
   return await axios.get(`https://api.spoonacular.com/recipes/${id}/information`, { 

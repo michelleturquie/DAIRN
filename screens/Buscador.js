@@ -4,7 +4,7 @@ import { Input, Stack } from "native-base";
 import axios from "axios";
 import Plato from './Plato.js';
 
-const API_KEY = "f3e7445d74fe49f7a2e5e541ad6229d7";
+const API_KEY = "221d9747c4fb456ea27b3066c173ae43";
 
 
 async function onChangeText(value) {
